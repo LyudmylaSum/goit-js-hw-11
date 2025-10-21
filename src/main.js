@@ -9,7 +9,7 @@ import "izitoast/dist/css/iziToast.min.css";
 import axios from "axios";
 
 
-import getImagesByQuer from './js/pixabay-api'
+import  { getImagesByQuery } from './js/pixabay-api'
 // import from './js/render-functions'
 
 const form = document.querySelector(".form");
