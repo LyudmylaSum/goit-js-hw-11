@@ -6,26 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla App Template</title>
     <script type="module" crossorigin src="/goit-js-hw-11/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-DwjKQ6tu.js">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/vendor-BfMlxmOj.css">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/index-DbsJBsYx.css">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-EBklf52_.js">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/vendor-BTg2DUSl.css">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/index-BVtXmqOC.css">
   </head>
   <body>
-
     <form class="form">
-  <label>
-    <input type="text" name="search-text" placeholder="Search images..." required>
-  </label>
-  <button type="submit">Search</button>
-</form>
+      <label>
+        <input
+          type="text"
+          name="query"
+          placeholder="Search images..."
+          required
+        />
+      </label>
+      <button type="submit">Search</button>
+    </form>
 
+    <div class="loader-container" hidden>
+        <p class="loading-text">Loading...</p>
+        <span class="loader-spinner"></span> 
+    </div>
 
-<span class="loader"></span>
+    <button id="searchBtn" hidden>
+      <span class="loader" id="btnSpinner" hidden></span>
+    </button>
 
+    <ul class="gallery"></ul>
 
-<ul class="gallery"></ul>
-
-
-    
   </body>
 </html>
