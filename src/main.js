@@ -6,11 +6,41 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 
-import axios from "axios";
-
-
-import  { getImagesByQuery } from './js/pixabay-api'
-// import from './js/render-functions'
+import  { getImagesByQuery } from './js/pixabay-api.js'
+import {
+  createGallery,
+  clearGallery,
+  showLoader,
+  hideLoader,
+} from './js/render-functions.js';
 
 const form = document.querySelector(".form");
-const gallery = document.querySelector(".gallery");
+
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  
+const query = event.target.elements.query.value.trim();
+  
+clearGallery();
+  showLoader();
+
+  getImagesByQuery(query)
+    .then(data => {
+      createGallery(data.hits);
+    })
+    .catch(error => {
+      iziToast.error({
+        message: error.message,
+        position: 'topCenter',
+        timeout: 3000,
+        backgroundColor: '#EF4040',
+        messageColor: 'white',
+        close: false,
+      });
+    })
+    .finally(() => {
+      event.target.elements.query.value = '';
+      hideLoader();
+    });
+});

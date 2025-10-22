@@ -4,15 +4,73 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 const galleryList = document.querySelector(".gallery");
-const loader = document.querySelector(".loader");
+const loaderContainer = document.querySelector(".loader");
+const spinner = document.querySelector(".spinner"); 
+const spinnerBtn = document.querySelector(".spinner-btn");
 
-let lightboxInstance = new SimpleLightbox('.gallery a', {
+let lightBox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt', 
     captionDelay: 250, 
     captionPosition: 'bottom',
 });
 
 
-function createGallery() {
-    
+export function createGallery(images = []) {
+  galleryList.innerHTML = images
+    .map(
+      ({
+        previewURL,
+        tags,
+        largeImageURL,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => `
+        <li class="gallery-item">
+            <a class="gallery-link" href="${largeImageURL}">
+                <img  class="gallery-image" src="${previewURL}" alt="${tags}" loading="lazy" 
+                title="Title: ${tags.split(',')[0].trim()}  |  
+                Likes: ${likes.toLocaleString()}  |  
+                View: ${views.toLocaleString()}  |  
+                Comments: ${comments.toLocaleString()}  |  
+                Downloads: ${downloads.toLocaleString()}"/>
+            </a>
+            <ul class="info-container">
+                <li class="info-box">
+                    <p class="info-title">Likes</p>
+                    <p class="info-value">${likes.toLocaleString()}</p>
+                </li>
+                <li class="info-box">
+                    <p class="info-title">View</p>
+                    <p class="info-value">${views.toLocaleString()}</p>
+                </li>
+                 <li class="info-box">
+                    <p class="info-title">Comments</p>
+                    <p class="info-value">${comments.toLocaleString()}</p>
+                </li>
+                <li class="info-box">
+                    <p class="info-title">Downloads</p>
+                    <p class="info-value">${downloads.toLocaleString()}</p>
+                </li>
+            </ul>
+        </li>
+    `
+    )
+    .join('');
+
+  lightbox.refresh();
 }
+
+export function clearGallery() {
+  galleryList.innerHTML = '';
+}
+
+export function showLoader() {
+  loaderContainer.hidden = false;
+}
+
+export function hideLoader() {
+  loaderContainer.hidden = true;
+}
+

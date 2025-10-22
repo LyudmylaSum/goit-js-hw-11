@@ -22,6 +22,7 @@ export function getImagesByQuery(query) {
       return result.data
     })
     .catch(error => {
-      console.log(error.message);
+      // console.log(error.message);
+      throw error;
     });
 }
