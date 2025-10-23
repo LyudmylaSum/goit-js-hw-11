@@ -21,12 +21,28 @@ form.addEventListener('submit', event => {
   event.preventDefault();
   
 const query = event.target.elements.query.value.trim();
+
+if (query === '') {
+        iziToast.warning({
+            message: 'Please enter a search query!',
+            position: 'topCenter',
+            timeout: 3000,
+            backgroundColor: '#FFA000',
+      messageColor: 'white',
+        });
+        return; 
+    }
   
 clearGallery();
   showLoader();
 
   getImagesByQuery(query)
     .then(data => {
+      if (!data.hits.length) {
+        throw new Error(
+          'Sorry, there are no images matching your search query. Please try again!'
+        );
+      }
       createGallery(data.hits);
     })
     .catch(error => {

@@ -19,7 +19,7 @@ export function createGallery(images = []) {
   galleryList.innerHTML = images
     .map(
       ({
-        previewURL,
+        webformatURL,
         tags,
         largeImageURL,
         likes,
@@ -29,7 +29,7 @@ export function createGallery(images = []) {
       }) => `
         <li class="gallery-item">
             <a class="gallery-link" href="${largeImageURL}">
-                <img  class="gallery-image" src="${previewURL}" alt="${tags}" loading="lazy" 
+                <img  class="gallery-image" src="${webformatURL}" alt="${tags}" loading="lazy" 
                 title="Title: ${tags.split(',')[0].trim()}  |  
                 Likes: ${likes.toLocaleString()}  |  
                 View: ${views.toLocaleString()}  |  
@@ -59,7 +59,7 @@ export function createGallery(images = []) {
     )
     .join('');
 
-  lightbox.refresh();
+  lightBox.refresh();
 }
 
 export function clearGallery() {
